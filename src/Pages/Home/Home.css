@@ -1,0 +1,129 @@
+nav{
+    display: flex;
+    gap: 1.5rem;
+    padding: 2rem 3rem;
+    color: gray;
+    cursor: pointer;
+    margin: 2rem 0;
+}
+
+nav p:hover{
+    color: black;
+    text-decoration: underline;
+}  
+
+nav p.active-tab {
+    color: black;
+    text-decoration: underline;
+}
+
+.events{
+    padding: 0 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.event {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    text-align: justify;
+    border-radius: 10px;
+    transition: box-shadow 0.3s ease; /* Smooth transition for the hover effect */
+    padding: 1rem;
+    cursor: pointer;
+  }
+  
+  .event:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 0 10px rgba(0, 0, 0, 0.1); /* Box shadow on hover */
+  }
+  
+
+.event img{
+    width: 10rem!important;
+    height: 5rem!important;
+}
+
+.description {
+    display: -webkit-box;
+    -webkit-line-clamp: 2; 
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .event-footer{
+    display: flex;
+    justify-content: space-between;
+    font-weight: 700;
+  }
+
+  .event-right{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+  }
+  
+  #heading{
+    margin-left: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .pagination {
+    display: flex;
+    list-style: none;
+    gap: 10px;
+    justify-content: center;
+    margin: 3rem 0;
+  }
+
+  .pagination a {
+    padding: 8px 12px;
+    cursor: pointer;
+    color: black;
+    border: 1px solid #ddd;
+  }
+
+  .pagination .active a {
+    background-color: black;
+    color: #fff;
+  }
+
+  .pagination a:hover {
+    background-color: black;
+    color: #fff;
+  }
+  
+  .pagination .disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+#hero-img{
+  padding: 1rem 3rem;
+}
+
+#hero-img img{
+  width: 100%;
+  height: 60vh;
+}
+
+@media (max-width: 900px) {
+  .event-footer{
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 600px) {
+  .event{
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 400px) {
+  #hero-img img{
+    width: 100%;
+    height: 30vh;
+  }
+}

@@ -1,0 +1,46 @@
+.event-detail{
+    padding: 3rem;
+    text-align: justify;
+}
+
+.event-detail-top{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.event-detail-top button{
+    background-color: black;
+    padding: 0.5rem 2rem;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.event-detail-top button:hover{
+    background-color: rgb(46, 46, 46);
+}
+
+.event-detail img{
+    width: 100%;
+}
+
+.seats{
+    display: flex;
+    gap: 2rem;
+    font-weight: 700;
+    margin: 1rem 0;
+    flex-wrap: wrap;
+}
+
+.bottom1margin{
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 350px) {
+    .event-detail-top{
+        flex-direction: column;
+        gap: 1rem;
+    }
+}

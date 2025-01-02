@@ -1,0 +1,66 @@
+header {
+    padding: 1rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    position: sticky;
+    width: 100%;
+    top: 0;
+    align-items: center;
+}
+
+header button {
+    padding: 0.5rem 2rem;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}
+
+header button:hover{
+    background-color: rgb(46, 46, 46);
+}
+
+#logo {
+    font-family: cursive;
+    font-size: 2rem;
+    text-decoration: none;
+    color: black;
+}
+
+.user-icon{
+    font-size: 2.5rem;
+    cursor: pointer;
+}
+
+/* Dropdown styles */
+.dropdown {
+    position: absolute;
+    top: 3.5rem; /* Adjust to position below the icon */
+    right: 3rem;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    z-index: 10;
+}
+
+.dropdown button {
+    background: none;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #333;
+    width: 100%;
+    text-align: left;
+}
+
+.dropdown button:hover {
+    background-color: #f0f0f0;
+    color: #000;
+}

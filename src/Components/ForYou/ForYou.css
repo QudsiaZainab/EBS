@@ -1,0 +1,26 @@
+.events button{
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 2rem;
+    cursor: pointer;
+    width: fit-content;
+}
+
+.events button:hover{
+    background-color: rgb(46, 46, 46);
+}
+
+#for-you{
+    display: inline;
+    text-align: center;
+}
+
+#for-you-comp{
+    display: flex;
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

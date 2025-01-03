@@ -1,4 +1,4 @@
-# Event Management System
+# Event Management System (Frontend)
 
 In this project, there are two pages home, and Event Detail.
 

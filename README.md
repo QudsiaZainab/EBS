@@ -1,4 +1,4 @@
-# Event Management System (Frontend)
+# Event Booking System (Frontend)
 
 In this project, there are two pages home, and Event Detail.
 

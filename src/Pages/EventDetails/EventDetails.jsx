@@ -61,6 +61,7 @@ const EventDetails = () => {
     
             if (response.ok) {
                 // Show success toast
+                event.bookedSeats = event.bookedSeats + 1;
                 toast.success('Seat booked successfully!');
             } else {
                 // Show error toast or alert

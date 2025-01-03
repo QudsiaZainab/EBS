@@ -5,6 +5,11 @@ import Loader from '../../Components/Loader/Loader';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; // Import Toastify CSS
 import './EventDetails.css';
+import io from 'socket.io-client';
+
+const socket = io('https://ebs-backend-3d2o.vercel.app', {
+    transports: ['websocket'], // Ensure using the WebSocket transport
+});
 
 const EventDetails = () => {
     const { id } = useParams();
@@ -14,6 +19,16 @@ const EventDetails = () => {
     const { url, token } = useContext(StoreContext); // If using a base URL context
 
     useEffect(() => {
+
+        // Log the WebSocket connection status
+        socket.on('connect', () => {
+            console.log('WebSocket connected:', socket.id);  // Log the socket ID to confirm the connection
+        });
+
+        socket.on('connect_error', (err) => {
+            console.error('WebSocket connection error:', err);  // Log any connection errors
+        });
+
         const fetchEventDetails = async () => {
             setLoading(true);
             setError(null);
@@ -36,6 +51,24 @@ const EventDetails = () => {
         };
 
         fetchEventDetails();
+
+        // WebSocket Listener for Real-Time Seat Updates
+        socket.on('updateSeats', (updatedEvent) => {
+            console.log("Received seat update:", updatedEvent);  // Log the seat update to ensure the event is triggered
+            
+            if (updatedEvent.eventId === id) {
+                setEvent((prev) => ({
+                    ...prev,
+                    bookedSeats: updatedEvent.bookedSeats,
+                }));
+            }
+        });
+
+        // Clean up socket connection when the component is unmounted
+        return () => {
+            socket.off('updateSeats');  // Unsubscribe from WebSocket event when component unmounts
+            socket.disconnect();  // Disconnect socket on component unmount
+        };
     }, [id, url]);
 
     const handleBooking = async () => {

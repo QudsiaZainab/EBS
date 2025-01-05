@@ -3,13 +3,19 @@ import { StoreContext } from '../../StoreContext/StoreContext';
 import { useParams } from 'react-router-dom';
 import Loader from '../../Components/Loader/Loader';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'; // Import Toastify CSS
+import 'react-toastify/dist/ReactToastify.css';
 import './EventDetails.css';
+import Pusher from 'pusher-js';
 // import io from 'socket.io-client';
 
 // const socket = io('https://ebs-backend-3d2o.vercel.app', {
 //     transports: ['websocket'], 
 // });
+
+const pusher = new Pusher(process.env.REACT_APP_PUSHER_KEY, {
+    cluster: process.env.REACT_APP_PUSHER_CLUSTER,
+    useTLS: true
+});
 
 const EventDetails = () => {
     const { id } = useParams();
@@ -69,6 +75,22 @@ const EventDetails = () => {
         //     socket.off('updateSeats');  // Unsubscribe from WebSocket event when component unmounts
         //     socket.disconnect();  // Disconnect socket on component unmount
         // };
+
+        const channel = pusher.subscribe('event-booking');
+        channel.bind('seatBooked', (updatedEvent) => {
+            if (updatedEvent.eventId === id) {
+                setEvent((prev) => ({
+                    ...prev,
+                    bookedSeats: updatedEvent.bookedSeats,
+                }));
+            }
+        });
+
+        return () => {
+            channel.unbind_all();
+            channel.unsubscribe();
+        };
+
     }, [id, url]);
 
     const handleBooking = async () => {
@@ -94,7 +116,6 @@ const EventDetails = () => {
     
             if (response.ok) {
                 // Show success toast
-                event.bookedSeats = event.bookedSeats + 1;
                 toast.success('Seat booked successfully!');
             } else {
                 // Show error toast or alert

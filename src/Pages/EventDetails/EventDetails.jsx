@@ -101,7 +101,7 @@ const EventDetails = () => {
         setLoading(true); // Show loader while booking
     
         try {
-            const token = localStorage.getItem('token'); // Assuming you store the token in localStorage
+            const token = localStorage.getItem('token'); 
     
             const response = await fetch(`${url}/api/events/${event._id}/book`, {
                 method: 'POST',

@@ -22,7 +22,7 @@ const StoreContextProvider = (props) => {
         localStorage.removeItem("token");
         localStorage.removeItem("tokenExpiration");
         setToken("");
-        navigate("/login"); // Redirect user to the login page
+        navigate("/"); // Redirect user to the login page
     };
 
     // Check token validity on load and auto logout if expired

@@ -1,5 +1,4 @@
 import { createContext, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
 export const StoreContext = createContext(null);
 
@@ -7,7 +6,6 @@ const StoreContextProvider = (props) => {
     const [showLogin, setShowLogin] = useState(false);
     const [token, setToken] = useState(""); 
     const url = "https://ebs-backend-3d2o.vercel.app";
-    const navigate = useNavigate();  // Redirect handler
 
     // Save token with expiration date
     const saveToken = (newToken) => {
@@ -22,7 +20,6 @@ const StoreContextProvider = (props) => {
         localStorage.removeItem("token");
         localStorage.removeItem("tokenExpiration");
         setToken("");
-        navigate("/"); // Redirect user to the login page
     };
 
     // Check token validity on load and auto logout if expired

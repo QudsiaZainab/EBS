@@ -10,19 +10,39 @@ const StoreContextProvider = (props) => {
     // Load token and userId from localStorage when the app initializes
     useEffect(() => {
         const storedToken = localStorage.getItem("token");
+        const tokenExpiry = localStorage.getItem("tokenExpiry");
         
+        const checkTokenExpiry = () => {
+            const currentTime = Date.now();
+            if (tokenExpiry && currentTime > parseInt(tokenExpiry, 10)) {
+                localStorage.removeItem("token");
+                localStorage.removeItem("tokenExpiry");
+                setToken(null);
+            }
+        };
+
         if (storedToken) {
             setToken(storedToken); // Update the token state if token exists
         }
+
+        const interval = setInterval(checkTokenExpiry, 1000);
+        return () => clearInterval(interval);
         
     }, [token]);
 
 
 
+    const setTokenWithExpiry = (newToken) => {
+        setToken(newToken);
+        const expiryTime = Date.now() + 7 * 24 * 60 * 60 * 1000;
+        localStorage.setItem("token", newToken);
+        localStorage.setItem("tokenExpiry", expiryTime.toString());
+    };
+
     const contextValue = {
         url,
         token,
-        setToken,
+        setToken: setTokenWithExpiry,
         showLogin,
         setShowLogin,
     };

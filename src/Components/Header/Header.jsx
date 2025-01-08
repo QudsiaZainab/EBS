@@ -15,7 +15,7 @@ const Header = () => {
         setToken(null); 
         setDropdownOpen(false); // Close dropdown after logout
         localStorage.removeItem('token'); // Remove token from local storage
-        
+        localStorage.removeItem("tokenExpiry");
         // Show success toast message
         toast.success('Logged out successfully');
     };

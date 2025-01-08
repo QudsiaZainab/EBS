@@ -65,8 +65,10 @@ const LoginPopup = () => {
             setLoading(false);  // Set loading to false when request finishes
     
             if ((response.status === 200 || response.status === 201) && response.data.success) {
+                const loginTime = new Date().toISOString();
                 setToken(response.data.token);
                 localStorage.setItem("token", response.data.token);
+                localStorage.setItem("loginTime", loginTime);
                 setShowLogin(false);
                 setServerErrors({ email: "", password: "", confirmPassword: "", general: "" });
     

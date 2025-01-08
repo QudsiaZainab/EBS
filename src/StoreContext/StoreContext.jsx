@@ -4,36 +4,25 @@ export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
     const [showLogin, setShowLogin] = useState(false);
-    const [token, setToken] = useState("");
+    const [token, setToken] = useState(""); // Token state
     const url = "https://ebs-backend-3d2o.vercel.app";
 
+    // Load token and userId from localStorage when the app initializes
     useEffect(() => {
         const storedToken = localStorage.getItem("token");
-        const tokenExpiry = localStorage.getItem("tokenExpiry");
-        const currentTime = Date.now();
-
-        if (storedToken && tokenExpiry) {
-            if (currentTime > parseInt(tokenExpiry, 10)) {
-                localStorage.removeItem("token");
-                localStorage.removeItem("tokenExpiry");
-                setToken("");
-            } else {
-                setToken(storedToken);
-            }
+        
+        if (storedToken) {
+            setToken(storedToken); // Update the token state if token exists
         }
-    }, []);
+        
+    }, [token]);
 
-    const setTokenWithExpiry = (newToken) => {
-        setToken(newToken);
-        const expiryTime = Date.now() + 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
-        localStorage.setItem("token", newToken);
-        localStorage.setItem("tokenExpiry", expiryTime.toString());
-    };
+
 
     const contextValue = {
         url,
         token,
-        setToken: setTokenWithExpiry,
+        setToken,
         showLogin,
         setShowLogin,
     };
@@ -45,4 +34,4 @@ const StoreContextProvider = (props) => {
     );
 };
 
-export default StoreContextProvider;
+export default StoreContextProvider; 
